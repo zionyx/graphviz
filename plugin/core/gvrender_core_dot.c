@@ -51,6 +51,7 @@ typedef enum {
 #ifdef WIN32 /*dependencies*/
     #pragma comment( lib, "cgraph.lib" )
     #pragma comment( lib, "gvc.lib" )
+    #pragma comment( lib, "xdot.lib" )
 //    #pragma comment( lib, "ingraphs.lib" )
 #endif
 
@@ -165,9 +166,9 @@ static void xdot_points(GVJ_t *job, char c, pointf * A, int n)
 {
     emit_state_t emit_state = job->obj->emit_state;
     char buf[BUFSIZ];
-    int i, rc;
+    int i;
 
-    rc = agxbputc(xbufs[emit_state], c);
+    agxbputc(xbufs[emit_state], c);
     sprintf(buf, " %d ", n);
     agxbput(xbufs[emit_state], buf);
     for (i = 0; i < n; i++)

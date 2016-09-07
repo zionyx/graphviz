@@ -25,7 +25,13 @@ extern "C" {
 #include <sys/types.h>
 #endif
 #ifdef HAVE_STDLIB_H
+#if !defined(WIN32) && !defined(DARWIN)
+#define __USE_GNU
 #include <stdlib.h>
+#undef __USE_GNU
+#else
+#include <stdlib.h>
+#endif
 #endif
 #ifdef HAVE_STDDEF_H
 #include <stddef.h>
@@ -36,6 +42,8 @@ extern "C" {
 #ifdef HAVE_STRING_H
 #include <string.h>
 #endif
+
+#include <inttypes.h>
 
 #include "types.h"
 #include "macros.h"

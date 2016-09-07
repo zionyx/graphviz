@@ -95,8 +95,8 @@ static gstack_t *S;
 
 %%
 
-graph		:  hdr body {endgraph();}
-			|  error	{freestack(); if (G) {endgraph(); agclose(G); G = Ag_G_global = NIL(Agraph_t*);}}
+graph		:  hdr body {freestack(); endgraph();}
+			|  error	{if (G) {freestack(); endgraph(); agclose(G); G = Ag_G_global = NIL(Agraph_t*);}}
 			|  /* empty */
 			;
 
@@ -336,7 +336,7 @@ static void nomacros(void)
 static void attrstmt(int tkind, char *macroname)
 {
 	item			*aptr;
-	int				kind;
+	int				kind = 0;
 	Agsym_t*  sym;
 
 		/* creating a macro def */
